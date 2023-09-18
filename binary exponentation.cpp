@@ -1,6 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+long long fact[10000001];
+
+const int mod = 1e9 + 7;
+
 long long binpow(long long num, long long p, const int mod)
 {
     if (p == 0)
@@ -11,35 +15,37 @@ long long binpow(long long num, long long p, const int mod)
     {
         return (num * binpow(num, p - 1, mod)) % mod;
     }
-    return (binpow(num, p / 2, mod) * binpow(num, p / 2, mod)) % mod;
+    auto res = binpow(num, p / 2, mod);
+    return (res * res) % mod;
 }
 
-// from fermat's little theorem : a ^ (p - 1) congruent to 1 % p (a is not divisible by p and p is prime)
-// we can rewrite B^C as k * (p - 1) + r
-// so we can write A^B^C % p = A^((p - 1) * k + r) % p = (1 * A ^ r) % p = A^r % p
-// r can also be written as B^C % (p - 1)
+void calculateFactorial()
+{
+    fact[0] = 1;
+    for (int i = 1; i <= 1e7; i++)
+    {
+        fact[i] = (fact[i - 1] * i) % mod;
+    }
+}
+
+long long nCr(long long n, long long r, int mod)
+{
+    auto temp = fact[n - r] * fact[r];
+    temp %= mod;
+    return (fact[n] * binpow(temp, mod - 2, mod)) % mod;
+}
 
 void runCases()
 {
-    int A, B, C, P;
-    cin >> A >> B >> C >> P;
-    if (A % P == 0)
-    {
-        if (B == 0 && C != 0)
-        {
-            cout << 1 << endl;
-        }
-        else
-            cout << 0 << endl;
-        return;
-    }
-    int temp = binpow(B, C, P - 1);
-    cout << binpow(A, temp, P) << "\n";
+    int N, M;
+    cin >> N >> M;
+    int ans = nCr(M + N, N, mod);
+    cout << ans << "\n";
 }
 
 int main()
 {
-    // sieve();
+    calculateFactorial();
     int T;
     cin >> T;
     while (T--)
