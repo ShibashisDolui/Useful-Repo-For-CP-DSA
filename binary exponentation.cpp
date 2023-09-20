@@ -37,10 +37,9 @@ long long nCr(long long n, long long r, int mod)
 
 void runCases()
 {
-    int N, M;
-    cin >> N >> M;
-    int ans = nCr(M + N, N, mod);
-    cout << ans << "\n";
+    int N;
+    cin >> N;
+    cout << ((long long)N * (N - 3) / 2) % mod;
 }
 
 int main()
