@@ -65,8 +65,6 @@ int totalStrength(vector<int> &str)
         l = (l % mod + mod) % mod;
         r = (r % mod + mod) % mod;
         long long rcnt = right[i] == -1 ? n - i : right[i] - i;
-        if (rcnt == 0)
-            rcnt = 1;
         long long lcnt = left[i] == -1 ? i + 1 : i - left[i];
         ans = (ans % mod + str[i] * ((l * rcnt) % mod + (r * lcnt) % mod) % mod) % mod;
         if (ans < 0)
