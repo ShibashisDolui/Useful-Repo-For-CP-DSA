@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define int long long int
 
 const int mod = 1e9 + 7;
 
@@ -26,8 +27,8 @@ int countPrimeFactors(int n)
 
 void runCases()
 {
-    int a, b, k;
-    cin >> a >> b >> k;
+    int a, b, q;
+    cin >> a >> b >> q;
     int min_steps = 0, max_steps = 0;
     if ((a % b == 0 || b % a == 0) && a != b)
     {
@@ -48,7 +49,7 @@ void runCases()
     }
 }
 
-int main()
+signed main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
